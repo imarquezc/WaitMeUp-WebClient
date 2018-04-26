@@ -4,8 +4,22 @@
   </h1>
 </div>
 
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <input name="title" ngModel required #title="ngModel">
+    <button>Submit</button>
+  </form>
+</div>
+
 <div class="requests">
-  <request *ngFor="let request of requests" [request]='request'></request>
+  <div class="request" *ngFor="let request of requests">
+      <div class="delete" (click)="delete(request)">X</div>
+      <div class="content" (click)="update_status(request)" >
+        <div class="title">{{request.title}}</div>
+        <div class="status">{{states[request.status]}}</div>
+        <qrcode [qrdata]="request.url" [size]="QRSIZE"></qrcode>
+      </div>
+  </div>
 </div>
 
 
